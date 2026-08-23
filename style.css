@@ -1,0 +1,435 @@
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial, sans-serif;
+}
+
+
+body{
+
+    min-height:100vh;
+    background:#171426;
+    color:white;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    padding:20px;
+
+    transition:0.3s;
+
+}
+
+
+
+h1{
+
+    font-size:60px;
+    margin:40px 0;
+
+}
+
+
+
+button{
+
+    border:none;
+    cursor:pointer;
+
+    padding:15px 30px;
+
+    border-radius:15px;
+
+    font-size:20px;
+
+    background:#00d84a;
+
+    color:white;
+
+    margin:8px;
+
+}
+
+
+
+button:hover{
+
+    transform:scale(1.05);
+
+}
+
+
+
+
+/* Theme Button */
+
+
+#themeBtn{
+
+    background:white;
+    color:#222;
+
+}
+
+
+
+/* Score */
+
+
+.scoreBoard{
+
+    display:flex;
+
+    gap:30px;
+
+    margin:25px;
+
+}
+
+
+
+.scoreBoard div{
+
+    background:white;
+
+    color:#222;
+
+    width:140px;
+
+    height:140px;
+
+    border-radius:25px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+
+.scoreBoard span{
+
+    font-size:45px;
+
+    color:#00c853;
+
+}
+
+
+
+/* Menu */
+
+
+#menu{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+
+
+#menu button{
+
+    width:250px;
+
+}
+
+
+
+
+
+/* Game */
+
+
+#game{
+
+    display:none;
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+
+
+#status{
+
+    font-size:35px;
+
+    margin:20px;
+
+}
+
+
+
+/* Board */
+
+
+.board{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,110px);
+
+    gap:10px;
+
+    background:#302e48;
+
+    padding:15px;
+
+    border-radius:25px;
+
+}
+
+
+
+.cell{
+
+    width:110px;
+
+    height:110px;
+
+    background:white;
+
+    border-radius:20px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:70px;
+
+    font-weight:bold;
+
+    color:#333;
+
+}
+
+
+
+.cell.x{
+
+    color:#2196f3;
+
+}
+
+
+
+.cell.o{
+
+    color:#ff9800;
+
+}
+
+
+
+.cell.win{
+
+    background:#00d84a;
+
+    color:white;
+
+}
+
+
+
+/* Result Popup */
+
+
+#resultScreen{
+
+    display:none;
+
+    position:fixed;
+
+    top:50%;
+
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:85%;
+
+    max-width:350px;
+
+    background:#302e48;
+
+    padding:25px;
+
+    border-radius:30px;
+
+    z-index:999;
+
+    text-align:center;
+
+}
+
+
+
+.resultBox h1{
+
+    font-size:45px;
+
+}
+
+
+
+#resultScreen button{
+
+    width:90%;
+
+}
+
+
+
+/* Light Mode */
+
+
+body.light{
+
+    background:#eeeeee;
+
+    color:#222;
+
+}
+
+
+
+body.light .cell{
+
+    background:white;
+
+}
+
+
+
+body.light .scoreBoard div{
+
+    background:white;
+
+}
+
+
+
+
+
+/* Mobile */
+
+
+@media(max-width:500px){
+
+
+h1{
+
+    font-size:45px;
+
+}
+
+
+.board{
+
+    grid-template-columns:repeat(3,90px);
+
+}
+
+
+.cell{
+
+    width:90px;
+
+    height:90px;
+
+    font-size:55px;
+
+}
+
+
+.scoreBoard{
+
+    gap:10px;
+
+}
+
+
+.scoreBoard div{
+
+    width:100px;
+
+    height:100px;
+
+}
+
+
+}
+
+/* X O Animation */
+
+.cell.x,
+.cell.o{
+
+    animation: pop 0.3s ease;
+
+}
+
+
+
+@keyframes pop{
+
+    0%{
+
+        transform:scale(0.5);
+
+    }
+
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+
+/* Winning Animation */
+
+.cell.win{
+
+    animation: winGlow 0.8s infinite alternate;
+
+}
+
+
+
+@keyframes winGlow{
+
+
+    from{
+
+        transform:scale(1);
+
+    }
+
+
+    to{
+
+        transform:scale(1.15);
+
+    }
+
+}
