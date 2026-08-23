@@ -1385,3 +1385,43 @@ hardBtn.addEventListener("click",()=>{
 
 
 });
+
+const socket = io();
+let mySymbol = null;
+let currentTurn = 'X';
+let gameActive = false;
+
+// Player Symbol Receive karein (X ya O)
+socket.on('playerAssigned', (data) => {
+    mySymbol = data.symbol;
+    console.log(`Aapka symbol: ${mySymbol}`);
+});
+
+socket.on('gameStart', (data) => {
+    gameActive = true;
+    alert("Dono players connect ho gaye! Game Shuru.");
+});
+
+socket.on('full', (msg) => alert(msg));
+
+// Box click event
+document.querySelectorAll('.cell').forEach((cell, index) => {
+    cell.addEventListener('click', () => {
+        if (gameActive && currentTurn === mySymbol && cell.innerText === '') {
+            socket.emit('makeMove', { index: index, symbol: mySymbol });
+        }
+    });
+});
+
+// Dusre player ka move board par dikhayein
+socket.on('moveMade', (data) => {
+    const cells = document.querySelectorAll('.cell');
+    cells[data.index].innerText = data.symbol;
+    currentTurn = data.nextTurn;
+});
+
+socket.on('playerLeft', (msg) => {
+    alert(msg);
+    location.reload();
+});
+
